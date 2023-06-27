@@ -16,11 +16,11 @@ const router = createRouter({
       component: DashboardTemplate,
       children:[
         {
-          path:"/",
+          path:"",
           component: HomeView
         },
         {
-          path:"/about",
+          path:"about",
           component: AboutView
         },
 

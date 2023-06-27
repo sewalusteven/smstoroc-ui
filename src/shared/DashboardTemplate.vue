@@ -1,5 +1,13 @@
 <script setup>
 import {RouterView } from 'vue-router'
+
+
+
+
+
+
+
+
 import {ref} from "vue";
 import NavBar from "@/shared/NavBar.vue";
 import SideBar from "@/shared/SideBar.vue";

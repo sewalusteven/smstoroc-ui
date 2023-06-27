@@ -27,59 +27,34 @@
                         </h1>
                         <label class="block text-sm">
                             <span class="text-gray-700 dark:text-gray-400">Email</span>
-                            <input
-                                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                            <input v-model="loginData.req.email"
+                                    class="block p-3 w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                                     placeholder="Jane Doe"
                             />
                         </label>
                         <label class="block mt-4 text-sm">
                             <span class="text-gray-700 dark:text-gray-400">Password</span>
-                            <input
-                                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                            <input v-model="loginData.req.password"
+                                    class="block p-3 w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                                     placeholder="***************"
                                     type="password"
                             />
                         </label>
 
                         <!-- You should use a button here, as the anchor is only used for the example  -->
-                        <a
-                                class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-                                href="../index.html"
+                        <button @click="handleLogin"
+                                class="block flex justify-between w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
                         >
-                            Log in
-                        </a>
+                            <span class="my-auto">  Log in</span>
+                            <div role="status" v-if="loginData.isLoading">
+                                <svg aria-hidden="true" class="w-6 h-6 mr-2 my-auto text-gray-200 animate-spin dark:text-gray-600 fill-purple-700 dark:fill-white" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                                    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                                </svg>
+                                <span class="sr-only">Loading...</span>
+                            </div>
 
-                        <hr class="my-8" />
 
-                        <button
-                                class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium leading-5 text-white text-gray-700 transition-colors duration-150 border border-gray-300 rounded-lg dark:text-gray-400 active:bg-transparent hover:border-gray-500 focus:border-gray-500 active:text-gray-500 focus:outline-none focus:shadow-outline-gray"
-                        >
-                            <svg
-                                    class="w-4 h-4 mr-2"
-                                    aria-hidden="true"
-                                    viewBox="0 0 24 24"
-                                    fill="currentColor"
-                            >
-                                <path
-                                        d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
-                                />
-                            </svg>
-                            Github
-                        </button>
-                        <button
-                                class="flex items-center justify-center w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-white text-gray-700 transition-colors duration-150 border border-gray-300 rounded-lg dark:text-gray-400 active:bg-transparent hover:border-gray-500 focus:border-gray-500 active:text-gray-500 focus:outline-none focus:shadow-outline-gray"
-                        >
-                            <svg
-                                    class="w-4 h-4 mr-2"
-                                    aria-hidden="true"
-                                    viewBox="0 0 24 24"
-                                    fill="currentColor"
-                            >
-                                <path
-                                        d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"
-                                />
-                            </svg>
-                            Twitter
                         </button>
 
                         <p class="mt-4">
@@ -90,14 +65,6 @@
                                 Forgot your password?
                             </a>
                         </p>
-                        <p class="mt-1">
-                            <a
-                                    class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
-                                    href="./create-account.html"
-                            >
-                                Create account
-                            </a>
-                        </p>
                     </div>
                 </div>
             </div>
@@ -105,6 +72,40 @@
     </div>
 </template>
 <script setup>
+import { notify } from "notiwind"
+import {useAuthStore} from "@/stores/auth";
+import {computed, reactive, watch} from "vue";
+
+const authStore =  useAuthStore();
+const loginData =  reactive({
+    req: {
+        email: "",
+        password: ""
+    },
+    isLoading: false
+})
+
+const handleLogin = () => {
+    loginData.isLoading = true;
+    authStore.login(loginData.req)
+}
+
+const response = computed(() => authStore.response)
+
+watch(response, (val) => {
+    loginData.isLoading = false;
+    alert("Response",JSON.stringify(val), "success")
+})
+
+
+const alert = (title, text, status) => {
+    notify({
+        group: "top",
+        title: title,
+        status:status,
+        text: text
+    }, 2000) // 4s
+}
 </script>
 
 <style scoped>
