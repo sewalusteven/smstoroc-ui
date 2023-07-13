@@ -3,16 +3,16 @@ import {authClient} from "@/config/httpClient";
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    response: null
+    response: {}
   }),
   getters: {
-      fetchResponse: (state) => state.response,
+      fetchResponse: (state) => state?.response.data,
   },
   actions: {
      login(requestBody){
        authClient.get('/sanctum/csrf-cookie').then(response => {
            console.log(response)
-           authClient.post('/login', requestBody).then(res => {
+           authClient.post('/api/login', requestBody).then(res => {
                this.response = res
            }).catch(err => {
                this.response = err.response;

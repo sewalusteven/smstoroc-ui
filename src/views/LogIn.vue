@@ -75,8 +75,11 @@
 import { notify } from "notiwind"
 import {useAuthStore} from "@/stores/auth";
 import {computed, reactive, watch} from "vue";
+import router from "@/router";
 
 const authStore =  useAuthStore();
+
+
 const loginData =  reactive({
     req: {
         email: "",
@@ -90,11 +93,19 @@ const handleLogin = () => {
     authStore.login(loginData.req)
 }
 
-const response = computed(() => authStore.response)
+const response = computed(() => authStore.fetchResponse)
 
 watch(response, (val) => {
     loginData.isLoading = false;
-    alert("Response",JSON.stringify(val), "success")
+    if(val.errors !== undefined){
+        alert("Error",val.message, "error")
+    }else{
+        //set token to localstorage and redirect to dashboard
+        localStorage.setItem('token', val.token)
+        localStorage.setItem('user', JSON.stringify(val.user))
+        router.push('dashboard')
+    }
+
 })
 
 
